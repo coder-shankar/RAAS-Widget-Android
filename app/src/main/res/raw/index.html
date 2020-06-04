@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Machnet widget</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+    </style>
+    </head>
+    <body>
+        <div id="widget-root" style="width:100%; margin:auto;"></div>
+        <script src="https://sandbox.api.machpay.com/v2/widget/widget.js"></script>
+        <script>
+      let widget = new MachnetWidget({
+        elementId: 'widget-root',
+        width: '100%',
+        height: '600px',
+        type: 'kyc',
+        locale: 'en',
+        multiStep: true,
+        senderId: 'sender_id',
+        token:
+          'place_token_here'
+      });
+      widget.init();
+
+
+      function receiveMessage(event) {
+        if (event.origin !== 'http://sandbox.api.machpay.com') return;
+        console.log(event.data);
+      }
+      window.addEventListener('message', receiveMessage);
+    </script>
+    </body>
+</html>
